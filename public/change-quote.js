@@ -1,8 +1,6 @@
 const changeButton = document.getElementById('change-quote');
-// const submitButton = document.getElementById('change-quote');
 const deleteButton = document.getElementById('delete-quote');
 const findButton = document.getElementById('find-quote');
-// const newQuoteContainer = document.getElementById('new-quote');
 const resultQuoteContainer = document.getElementById('result-quote');
 const foundQuoteContainer = document.getElementById('found-quote');
 

@@ -1,6 +1,7 @@
+const { query } = require('express');
 const express = require ('express');
 const quotesData = require('../data.js');
-const {getRandomElement, getElementById} = require('../utils.js');
+const {getRandomElement, getElementById, getIndexById} = require('../utils.js');
 
 quoteApiRouter = express.Router();
 
@@ -27,11 +28,22 @@ quoteApiRouter.get('/random', (req, res) => {
 quoteApiRouter.get('/:id', (req, res) => {
     let findedQuote = {quote:{}};
     findedQuote.quote = getElementById(req.params.id, quotesData.quotes)
-    // const quoteRandom = {quote:{}};
-    // quoteRandom.quote = getRandomElement(quotesData.quotes);
     res.status(200).json(findedQuote);
 })
 
+//Change quote in the database
+quoteApiRouter.put('/', (req, res) => {
+    let findedQuote = {quote:{}};
+    if (req.query.person&&req.query.quote&&req.query.id){
+        findedQuote.quote = getElementById(req.query.id, quotesData.quotes);
+        //findedQuote.quote.id = req.query.id;
+        findedQuote.quote.quote = req.query.quote;
+        findedQuote.quote.person = req.query.person;
+        res.status(202).send(findedQuote);
+    } else {
+        res.status(400).send();
+    }
+})
 
 //Add new quote to database
 quoteApiRouter.post('/', (req, res) => {
@@ -41,7 +53,7 @@ quoteApiRouter.post('/', (req, res) => {
         newQuote.quote.quote = req.query.quote+1;
         newQuote.quote.person = req.query.person;
         quotesData.quotes.push(newQuote.quote);
-        res.status(200).send(newQuote);
+        res.status(201).send(newQuote);
     } else {
         res.status(400).send();
     }
