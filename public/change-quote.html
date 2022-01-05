@@ -14,19 +14,24 @@
     <a href="add-quote.html">Add a New Quote</a>
     <a href="change-quote.html">Change Quote</a>
   </nav>
-  <h2>Add a New Quote</h2>
+  <h2>Change Quote</h2>
   <div class="inputs">
+    <label for="id">ID:</label>
+    <input id="id" value="">
+    <button id="find-quote">Find Quote</button>
+        <div id="found-quote"></div>
     <label for="quote">Quote text:</label>
     <input id="quote" value="">
     <label for="person">Person:</label>
     <input id="person" value="">
   </div>
   <div>
-    <button id="submit-quote">Submit Your Quote</button>
+    <button id="change-quote">Change Quote</button>
+    <button id="delete-quote">Delete Quote</button>
   </div>
-  <div id="new-quote">
+  <div id="result-quote">
     
   </div>
-  <script src="add-quote.js"></script>
+  <script src="change-quote.js"></script>
 </body>
 </html>
