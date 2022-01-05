@@ -40,14 +40,36 @@ changeButton.addEventListener('click', () => {
     method: 'PUT',
   })
   .then(response => response.json())
-//   .then(({quote}) => {
-//     const newQuote = document.createElement('div');
-//     newQuote.innerHTML = `
-//     <h3>Congrats, your quote was added!</h3>
-//     <div class="quote-text">${quote.quote}</div>
-//     <div class="attribution">- ${quote.person}</div>
-//     <p>Go to the <a href="index.html">home page</a> to request and view all quotes.</p>
-//     `
-//     newQuoteContainer.appendChild(newQuote);
-//   });
+  .then(({quote}) => {
+    const newQuote = document.createElement('div');
+    resultQuoteContainer.innerHTML = '';
+    newQuote.innerHTML = `
+    <h3>Congrats, your quote was changed!</h3>
+    <div class="quote-text">${quote.quote}</div>
+    <div class="attribution">- ${quote.person}</div>
+    <p>Go to the <a href="index.html">home page</a> to request and view all quotes.</p>
+    `
+    resultQuoteContainer.appendChild(newQuote);
+  });
+});
+
+deleteButton.addEventListener('click', () => {
+    const quote = document.getElementById('quote').value;
+    const idField = document.getElementById('id');
+    const quoteField = document.getElementById('quote');
+    const personField = document.getElementById('person');
+
+  fetch(`/api/quotes?quote=${quote}`, {
+    method: 'DELETE',
+  })
+  .then(response => response.json())
+  .then(({quote}) => {
+    const newQuote = document.createElement('div');
+    foundQuoteContainer.innerHTML = '';
+        idField.value = "";
+        quoteField.value = "";
+        personField.value = "";
+        newQuote.innerHTML = '<p align="center">Deleted!!!</p>';
+        foundQuoteContainer.appendChild(newQuote);
+    });
 });

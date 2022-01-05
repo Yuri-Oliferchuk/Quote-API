@@ -59,4 +59,14 @@ quoteApiRouter.post('/', (req, res) => {
     }
 })
 
+quoteApiRouter.delete('/', (req, res) => {
+    if (req.query.quote) {
+        let quote = req.query.quote;
+        quotesData.quotes = quotesData.quotes.filter(c => c.quote !== quote);
+        res.status(200).send(quotesData);
+    } else {
+        res.status(400).send();
+    }
+})
+
 module.exports = quoteApiRouter;
